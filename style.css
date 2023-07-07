@@ -1,0 +1,29 @@
+.calculator {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: stretch;
+    height: 750px;
+    width: 750px;
+    border: 1px solid black;
+}
+.display {
+    display: flex;
+    align-self: flex-end;
+    font-size: 100px
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.row1, .row2, .row3, .row4 {
+    display: flex;
+    flex: 1;
+}
+
+.number, .operator, .clear, .equals {
+    display: flex;
+    flex: 1;
+    font-size: 100px;
+}
