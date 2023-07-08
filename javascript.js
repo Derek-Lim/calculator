@@ -217,4 +217,9 @@ equals.addEventListener('click', () => {
 clear.addEventListener('click', () => {
     displayValue = 0;
     display.textContent = '';
+    click = 0;
+    x = 0;
+    a = 0;
+    b = 0;
+    operator = '';
 })
