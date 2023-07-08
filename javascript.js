@@ -56,78 +56,157 @@ function operate(a, operator, b) {
     }
 }
 
+//variable to assist in emptying display before accepting new operand
+let x = 0;
 //make numbers populate display when clicked
 n1.addEventListener('click', () => {
+    //empty display content before accepting new operand
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
+    //concatenate numbers like string
     display.textContent += 1;
+    //then save the value
     displayValue = display.textContent;
 });
 n2.addEventListener('click', () => {
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
     display.textContent += 2;
     displayValue = display.textContent;
 });
 n3.addEventListener('click', () => {
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
     display.textContent += 3;
     displayValue = display.textContent;
 });
 n4.addEventListener('click', () => {
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
     display.textContent += 4;
     displayValue = display.textContent;
 });
 n5.addEventListener('click', () => {
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
     display.textContent += 5;
     displayValue = display.textContent;
 });
 n6.addEventListener('click', () => {
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
     display.textContent += 6;
     displayValue = display.textContent;
 });
 n7.addEventListener('click', () => {
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
     display.textContent += 7;
     displayValue = display.textContent;
 });
 n8.addEventListener('click', () => {
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
     display.textContent += 8;
     displayValue = display.textContent;
 });
 n9.addEventListener('click', () => {
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
     display.textContent += 9;
     displayValue = display.textContent;
 });
 n0.addEventListener('click', () => {
+    while (x >= 1) {
+        x -= 1;
+        display.textContent = '';
+    }
     display.textContent += 0;
     displayValue = display.textContent;
 });
 
-//make operators:
-//save value for first operand,
-//prepare to accept value for second operand,
-//save the operator that was clicked on
+//variable that records number of times an operator button has been clicked
+let click = 0;
+
 add1.addEventListener('click', () => {
-    a = +displayValue;
-    displayValue = 0;
-    display.textContent = '';
-    operator = '+';
+    click += 1;
+    x += 1;
+    //for first click
+    if (click <= 1) {
+        //make the display value into first operand
+        a = +displayValue; 
+        //save the operator
+        operator = '+';
+    //for second click and beyond
+    } else {
+        //make the display value into second operand
+        b = +displayValue;
+        //do the operation, assign the result into a
+        a = operate(a, operator, b);
+        //save the operator
+        operator = '+';
+        display.textContent = a;
+    }
 })
 subtract1.addEventListener('click', () => {
-    a = +displayValue;
-    displayValue = 0;
-    display.textContent = '';
-    operator = '-';
+    click += 1;
+    x += 1;
+    if (click <= 1) {
+        a = +displayValue;
+        operator = '-';
+    } else {
+        b = +displayValue;
+        a = operate(a, operator, b);
+        operator = '-';
+        display.textContent = a;
+    }
 })
 multiply1.addEventListener('click', () => {
-    a = +displayValue;
-    displayValue = 0;
-    display.textContent = '';
-    operator = '*';
+    click += 1;
+    x += 1;
+    if (click <= 1) {
+        a = +displayValue;
+        operator = '*';
+    } else {
+        b = +displayValue;
+        a = operate(a, operator, b);
+        operator = '*';
+        display.textContent = a;
+    }
 })
 divide1.addEventListener('click', () => {
-    a = +displayValue;
-    displayValue = 0;
-    display.textContent = '';
-    operator = '/';
+    click += 1;
+    x += 1;
+    if (click <= 1) {
+        a = +displayValue;
+        operator = '/';
+    } else {
+        b = +displayValue;
+        a = operate(a, operator, b);
+        operator = '/';
+        display.textContent = a;
+    }
 })
 
-//make "equals" show solution on display when clicked
+//make "equals" show last operation on display when clicked
 equals.addEventListener('click', () => {
     b = +displayValue;
     result = operate(a, operator, b);
