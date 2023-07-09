@@ -42,6 +42,7 @@ let b;
 let displayValue;
 
 //create function operate()
+let divideZeroByZero = 0;
 function operate(a, operator, b) {
     if (operator == '+') {
         return add(a,b);
@@ -50,7 +51,11 @@ function operate(a, operator, b) {
     } else if (operator == '*') {
         return multiply(a,b);
     } else if (operator == '/') {
-        return divide(a,b);
+        if ((a == 0) && (b == 0)) {
+            divideZeroByZero += 1;
+        } else {
+            return divide(a,b);
+        }
     } else {
         console.log('error');
     }
@@ -165,7 +170,14 @@ add1.addEventListener('click', () => {
         a = Math.round(a * 100) / 100;
         //save the operator
         operator = '+';
-        display.textContent = a;
+        //if 0/0 is attempted, clear data and mock user
+        if (divideZeroByZero >= 1) {
+            clear1();
+            display.textContent = 'bruh...';
+        //otherwise, display result
+        } else {
+            display.textContent = a;
+        }
     }
 })
 subtract1.addEventListener('click', () => {
@@ -179,7 +191,12 @@ subtract1.addEventListener('click', () => {
         a = operate(a, operator, b);
         a = Math.round(a * 100) / 100;
         operator = '-';
-        display.textContent = a;
+        if (divideZeroByZero >= 1) {
+            clear1();
+            display.textContent = 'bruh...';
+        } else {
+            display.textContent = a;
+        }
     }
 })
 multiply1.addEventListener('click', () => {
@@ -193,7 +210,12 @@ multiply1.addEventListener('click', () => {
         a = operate(a, operator, b);
         a = Math.round(a * 100) / 100;
         operator = '*';
-        display.textContent = a;
+        if (divideZeroByZero >= 1) {
+            clear1();
+            display.textContent = 'bruh...';
+        } else {
+            display.textContent = a;
+        }
     }
 })
 divide1.addEventListener('click', () => {
@@ -207,7 +229,12 @@ divide1.addEventListener('click', () => {
         a = operate(a, operator, b);
         a = Math.round(a * 100) / 100;
         operator = '/';
-        display.textContent = a;
+        if (divideZeroByZero >= 1) {
+            clear1();
+            display.textContent = 'bruh...';
+        } else {
+            display.textContent = a;
+        }
     }
 })
 
@@ -216,11 +243,21 @@ equals.addEventListener('click', () => {
     b = +displayValue;
     result = operate(a, operator, b);
     result = Math.round(result * 100) / 100;
-    display.textContent = `${a} ${operator} ${b} = ${result}`
+    if (divideZeroByZero >= 1) {
+        clear1();
+        display.textContent = 'bruh...';
+    } else {
+        display.textContent = `${a} ${operator} ${b} = ${result}`;
+    }
 })
 
 //make "clear" clear the display when clicked
 clear.addEventListener('click', () => {
+    clear1();
+})
+
+//clear1() resets all data
+function clear1() {
     displayValue = 0;
     display.textContent = '';
     click = 0;
@@ -228,4 +265,5 @@ clear.addEventListener('click', () => {
     a = 0;
     b = 0;
     operator = '';
-})
+    divideZeroByZero = 0;
+}
