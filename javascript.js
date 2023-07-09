@@ -161,6 +161,8 @@ add1.addEventListener('click', () => {
         b = +displayValue;
         //do the operation, assign the result into a
         a = operate(a, operator, b);
+        //round result to 2 decimal places
+        a = Math.round(a * 100) / 100;
         //save the operator
         operator = '+';
         display.textContent = a;
@@ -175,6 +177,7 @@ subtract1.addEventListener('click', () => {
     } else {
         b = +displayValue;
         a = operate(a, operator, b);
+        a = Math.round(a * 100) / 100;
         operator = '-';
         display.textContent = a;
     }
@@ -188,6 +191,7 @@ multiply1.addEventListener('click', () => {
     } else {
         b = +displayValue;
         a = operate(a, operator, b);
+        a = Math.round(a * 100) / 100;
         operator = '*';
         display.textContent = a;
     }
@@ -201,6 +205,7 @@ divide1.addEventListener('click', () => {
     } else {
         b = +displayValue;
         a = operate(a, operator, b);
+        a = Math.round(a * 100) / 100;
         operator = '/';
         display.textContent = a;
     }
@@ -210,6 +215,7 @@ divide1.addEventListener('click', () => {
 equals.addEventListener('click', () => {
     b = +displayValue;
     result = operate(a, operator, b);
+    result = Math.round(result * 100) / 100;
     display.textContent = `${a} ${operator} ${b} = ${result}`
 })
 
