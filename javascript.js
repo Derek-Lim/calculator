@@ -63,6 +63,7 @@ function operate(a, operator, b) {
 
 //variable to assist in emptying display before accepting new operand
 let x = 0;
+let lastClickNumber = undefined;
 //make numbers populate display when clicked
 n1.addEventListener('click', () => {
     //empty display content before accepting new operand
@@ -76,6 +77,8 @@ n1.addEventListener('click', () => {
     displayValue = display.textContent;
     //last click before clicking equals is an not an operator
     lastClickOperator = false;
+    //last click before clicking an operator is true
+    lastClickNumber = true;
 });
 n2.addEventListener('click', () => {
     while (x >= 1) {
@@ -85,6 +88,7 @@ n2.addEventListener('click', () => {
     display.textContent += 2;
     displayValue = display.textContent;
     lastClickOperator = false;
+    lastClickNumber = true;
 });
 n3.addEventListener('click', () => {
     while (x >= 1) {
@@ -94,6 +98,7 @@ n3.addEventListener('click', () => {
     display.textContent += 3;
     displayValue = display.textContent;
     lastClickOperator = false;
+    lastClickNumber = true;
 });
 n4.addEventListener('click', () => {
     while (x >= 1) {
@@ -103,6 +108,7 @@ n4.addEventListener('click', () => {
     display.textContent += 4;
     displayValue = display.textContent;
     lastClickOperator = false;
+    lastClickNumber = true;
 });
 n5.addEventListener('click', () => {
     while (x >= 1) {
@@ -112,6 +118,7 @@ n5.addEventListener('click', () => {
     display.textContent += 5;
     displayValue = display.textContent;
     lastClickOperator = false;
+    lastClickNumber = true;
 });
 n6.addEventListener('click', () => {
     while (x >= 1) {
@@ -121,6 +128,7 @@ n6.addEventListener('click', () => {
     display.textContent += 6;
     displayValue = display.textContent;
     lastClickOperator = false;
+    lastClickNumber = true;
 });
 n7.addEventListener('click', () => {
     while (x >= 1) {
@@ -130,6 +138,7 @@ n7.addEventListener('click', () => {
     display.textContent += 7;
     displayValue = display.textContent;
     lastClickOperator = false;
+    lastClickNumber = true;
 });
 n8.addEventListener('click', () => {
     while (x >= 1) {
@@ -139,6 +148,7 @@ n8.addEventListener('click', () => {
     display.textContent += 8;
     displayValue = display.textContent;
     lastClickOperator = false;
+    lastClickNumber = true;
 });
 n9.addEventListener('click', () => {
     while (x >= 1) {
@@ -148,6 +158,8 @@ n9.addEventListener('click', () => {
     display.textContent += 9;
     displayValue = display.textContent;
     lastClickOperator = false;
+    lastClickNumber = true;
+    console.log(lastClickNumber);
 });
 n0.addEventListener('click', () => {
     while (x >= 1) {
@@ -157,6 +169,7 @@ n0.addEventListener('click', () => {
     display.textContent += 0;
     displayValue = display.textContent;
     lastClickOperator = false;
+    lastClickNumber = true;
 });
 
 //variable that records number of times an operator button has been clicked
@@ -167,91 +180,127 @@ add1.addEventListener('click', () => {
     x += 1;
     //last click before clicking equals is an operator
     lastClickOperator = true;
-    //for first click
-    if (click <= 1) {
-        //make the display value into first operand
-        a = +displayValue; 
-        //save the operator
-        operator = '+';
-    //for second click and beyond
+    //if last click is not a number, tell user to select an operand first
+    if ((lastClickNumber == false) || (lastClickNumber == undefined)) {
+        display.textContent = 'Please select an operand first';
+        click = 0;
     } else {
-        //make the display value into second operand
-        b = +displayValue;
-        //do the operation, assign the result into a
-        a = operate(a, operator, b);
-        //round result to 2 decimal places
-        a = Math.round(a * 100) / 100;
-        //save the operator
-        operator = '+';
-        //if 0/0 is attempted, clear data and mock user
-        if (divideZeroByZero >= 1) {
-            clear1();
-            display.textContent = 'bruh...';
-        //otherwise, display result
+        //for first click
+        if (click <= 1) {
+            //make the display value into first operand
+            a = +displayValue; 
+            //save the operator
+            operator = '+';
+        //for second click and beyond
         } else {
+            //make the display value into second operand
+            b = +displayValue;
+            //do the operation, assign the result into a
+            a = operate(a, operator, b);
+            //round result to 2 decimal places
+            a = Math.round(a * 100) / 100;
+            //save the operator
+            operator = '+';
+            //if 0/0 is attempted, clear data and mock user
+            if (divideZeroByZero >= 1) {
+                clear1();
+                display.textContent = 'bruh...';
+            //otherwise, display result
+            } else {
             display.textContent = a;
+            }
         }
     }
+    lastClickNumber = false;
 })
 subtract1.addEventListener('click', () => {
     click += 1;
     x += 1;
+    //last click before clicking equals is an operator
     lastClickOperator = true;
-    if (click <= 1) {
-        a = +displayValue;
-        operator = '-';
+    if ((lastClickNumber == false) || (lastClickNumber == undefined)) {
+        display.textContent = 'Please select an operand first';
+        click = 0;
     } else {
-        b = +displayValue;
-        a = operate(a, operator, b);
-        a = Math.round(a * 100) / 100;
-        operator = '-';
-        if (divideZeroByZero >= 1) {
-            clear1();
-            display.textContent = 'bruh...';
+        //for first click
+        if (click <= 1) {
+            //make the display value into first operand
+            a = +displayValue; 
+            //save the operator
+            operator = '-';
+        //for second click and beyond
         } else {
+            //make the display value into second operand
+            b = +displayValue;
+            //do the operation, assign the result into "a"
+            a = operate(a, operator, b);
+            //round result to 2 decimal places
+            a = Math.round(a * 100) / 100;
+            //save the operator
+            operator = '-';
+            //if 0/0 is attempted, clear data and mock user
+            if (divideZeroByZero >= 1) {
+                clear1();
+                display.textContent = 'bruh...';
+            //otherwise, display result
+            } else {
             display.textContent = a;
+            }
         }
     }
+    lastClickNumber = false;
 })
 multiply1.addEventListener('click', () => {
     click += 1;
     x += 1;
     lastClickOperator = true;
-    if (click <= 1) {
-        a = +displayValue;
-        operator = '*';
+    if ((lastClickNumber == false) || (lastClickNumber == undefined)) {
+        display.textContent = 'Please select an operand first';
+        click = 0;
     } else {
-        b = +displayValue;
-        a = operate(a, operator, b);
-        a = Math.round(a * 100) / 100;
-        operator = '*';
-        if (divideZeroByZero >= 1) {
-            clear1();
-            display.textContent = 'bruh...';
+        if (click <= 1) {
+            a = +displayValue; 
+            operator = '*';
         } else {
+            b = +displayValue;
+            a = operate(a, operator, b);
+            a = Math.round(a * 100) / 100;
+            operator = '*';
+            if (divideZeroByZero >= 1) {
+                clear1();
+                display.textContent = 'bruh...';
+            } else {
             display.textContent = a;
+            }
         }
     }
+    lastClickNumber = false;
 })
 divide1.addEventListener('click', () => {
     click += 1;
     x += 1;
     lastClickOperator = true;
-    if (click <= 1) {
-        a = +displayValue;
-        operator = '/';
+    if ((lastClickNumber == false) || (lastClickNumber == undefined)) {
+        display.textContent = 'Please select an operand first';
+        click = 0;
     } else {
-        b = +displayValue;
-        a = operate(a, operator, b);
-        a = Math.round(a * 100) / 100;
-        operator = '/';
-        if (divideZeroByZero >= 1) {
-            clear1();
-            display.textContent = 'bruh...';
+        if (click <= 1) {
+            a = +displayValue; 
+            operator = '/';
         } else {
+            b = +displayValue;
+            a = operate(a, operator, b);
+            a = Math.round(a * 100) / 100;
+            operator = '/';
+            if (divideZeroByZero >= 1) {
+                clear1();
+                display.textContent = 'bruh...';
+            } else {
             display.textContent = a;
+            }
         }
     }
+    lastClickNumber = false;
 })
 
 //make "equals" show last operation on display when clicked
@@ -288,6 +337,7 @@ function clear1() {
     b = 0;
     operator = '';
     divideZeroByZero = 0;
+    lastClickNumber = undefined;
 }
 
 //clear2() resets some data
@@ -298,4 +348,5 @@ function clear2() {
     b = 0;
     operator = '';
     divideZeroByZero = 0;
+    lastClickNumber = undefined;
 }
